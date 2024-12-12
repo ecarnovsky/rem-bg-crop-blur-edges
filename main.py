@@ -6,10 +6,6 @@ import os
 HORIZONTAL_PADDING = 20
 TOP_PADDING = 20
 BOTTOM_PADDING = 20
-
-
-
-
 MAX_SIZE = 2048
 BLUR = 10
 INPUT_FOLDER = 'input_images'
