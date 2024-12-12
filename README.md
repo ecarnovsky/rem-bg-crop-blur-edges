@@ -1,4 +1,4 @@
-This program alters images by:
+This script alters images by:
 - Removing the background
 - Cropping the image
 - Shrinking large images
