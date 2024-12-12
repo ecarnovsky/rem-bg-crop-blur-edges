@@ -3,8 +3,13 @@ from PIL import Image, ImageFilter
 import io
 import os
 
-BOTTOM_PADDING = 20
+HORIZONTAL_PADDING = 20
 TOP_PADDING = 20
+BOTTOM_PADDING = 20
+
+
+
+
 MAX_SIZE = 2048
 BLUR = 10
 INPUT_FOLDER = 'input_images'
@@ -23,7 +28,7 @@ def resize_image(image):
         else:
             new_height = MAX_SIZE
             new_width = int(MAX_SIZE * aspect_ratio)
-        resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
+        resized_image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
         return resized_image
     return image
 
@@ -41,10 +46,10 @@ def remove_background_and_crop(input_path, output_path):
 
     # Add padding to the bounding box
     x0, y0, x1, y1 = bbox
-    x0 = max(0, x0 - BOTTOM_PADDING) 
+    x0 = max(0, x0 - HORIZONTAL_PADDING) 
     y0 = max(0, y0 - TOP_PADDING) 
-    x1 = min(output_pil_image.width, x1 + BOTTOM_PADDING) 
-    y1 = min(output_pil_image.height, y1 + TOP_PADDING)
+    x1 = min(output_pil_image.width, x1 + HORIZONTAL_PADDING) 
+    y1 = min(output_pil_image.height, y1 + BOTTOM_PADDING)
 
     # Crop the image with the padding
     cropped_image = output_pil_image.crop((x0, y0, x1, y1))
