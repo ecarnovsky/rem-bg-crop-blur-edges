@@ -63,14 +63,24 @@ def remove_background_and_crop(input_path, output_path):
     resized_cropped_image.save(output_path, format="PNG")
 
 def process_folder():
+    # Check if the output folder exists, and create it if it doesn't
     if not os.path.exists(OUTPUT_FOLDER):
+        print(f"Creating output folder: {OUTPUT_FOLDER}")
         os.makedirs(OUTPUT_FOLDER)
+    else:
+        print(f"Output folder already exists: {OUTPUT_FOLDER}")
 
+    # Process each file in the input folder
     for filename in os.listdir(INPUT_FOLDER):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             input_path = os.path.join(INPUT_FOLDER, filename)
             output_path = os.path.join(OUTPUT_FOLDER, os.path.splitext(filename)[0] + TEXT_APPENDED_TO_IMG_NAME + '.png')
+            print(f"About to process file: {filename}")
             remove_background_and_crop(input_path, output_path)
+            print(f"Finished processing file: {filename}")
+        else:
+            print(f"Skipping non-image file: {filename}")
+
 
 
 process_folder()
